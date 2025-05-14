@@ -45,10 +45,10 @@ class GameState {
     if (roundCompleted) {
       _canLevelUp = true;
     }
-    
+
     if (_canLevelUp) {
       final nextPhaseIndex = GamePhase.values.indexOf(_currentPhase) + 1;
-      if (nextPhaseIndex < GamePhase.values.length && 
+      if (nextPhaseIndex < GamePhase.values.length &&
           score >= GamePhase.values[nextPhaseIndex].requiredScore) {
         _currentPhase = GamePhase.values[nextPhaseIndex];
         _canLevelUp = false;
@@ -273,15 +273,15 @@ class _GameScreenState extends State<GameScreen> with SingleTickerProviderStateM
           } else {
             _gameState.checkPhaseUpdate(true);
             _gameState.gameOver = true;
-            
+
             String phaseMessage = '';
             final nextPhaseIndex = GamePhase.values.indexOf(_gameState.currentPhase) + 1;
-            if (_gameState.canLevelUp && 
+            if (_gameState.canLevelUp &&
                 nextPhaseIndex < GamePhase.values.length &&
                 _gameState.score < GamePhase.values[nextPhaseIndex].requiredScore) {
               phaseMessage = ' Complete ${GamePhase.values[nextPhaseIndex].requiredScore - _gameState.score} pontos para próxima fase!';
             }
-            
+
             _gameState.feedbackMessage = 'Fim do jogo! Placar final: ${_gameState.score}.$phaseMessage';
             _animationController.forward(from: 0);
           }
@@ -336,7 +336,7 @@ class _GameScreenState extends State<GameScreen> with SingleTickerProviderStateM
       if (isValid && !_gameState.foundWords.contains(word.toLowerCase())) {
         _gameState.foundWords.add(word.toLowerCase());
         _gameState.score += word.length;
-        
+
         _gameState.feedbackMessage = 'Palavra válida! 🎉 +${word.length} pontos';
       } else if (_gameState.foundWords.contains(word.toLowerCase())) {
         _gameState.feedbackMessage = 'Palavra já encontrada!';
@@ -614,8 +614,8 @@ class FeedbackMessage extends StatelessWidget {
           message,
           style: TextStyle(
             fontSize: 16,
-            color: message.contains('válida') || message.contains('Parabéns') 
-                ? Colors.green.shade800 
+            color: message.contains('válida') || message.contains('Parabéns')
+                ? Colors.green.shade800
                 : Colors.red.shade800,
             fontWeight: FontWeight.w600,
           ),
@@ -646,10 +646,10 @@ class PhaseDisplay extends StatelessWidget {
     final nextPhaseIndex = GamePhase.values.indexOf(phase) + 1;
     final hasNextPhase = nextPhaseIndex < GamePhase.values.length;
     final nextPhase = hasNextPhase ? GamePhase.values[nextPhaseIndex] : null;
-    
+
     double progress = 0;
     String progressText = '';
-    
+
     if (hasNextPhase) {
       if (canLevelUp) {
         progress = score / nextPhase!.requiredScore;
