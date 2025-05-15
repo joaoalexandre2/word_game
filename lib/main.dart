@@ -119,7 +119,7 @@ class WordGameApp extends StatelessWidget {
           contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
           labelStyle: TextStyle(color: Colors.blueGrey.shade600),
         ),
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData( // Alterado de CardTheme para CardThemeData
           elevation: 6,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
