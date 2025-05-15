@@ -2,15 +2,29 @@
   "version": 2,
   "builds": [
     {
-      "src": "build/web/index.html",
+      "src": "**/*.html",
       "use": "@vercel/static-build",
-      "config": { "distDir": "build/web" }
+      "config": {
+        "distDir": "build/web",
+        "buildCommand": "flutter build web --release --web-renderer html",
+        "installCommand": "flutter pub get"
+      }
     }
   ],
   "routes": [
     {
+      "src": "/.*",
+      "dest": "/index.html",
+      "headers": {
+        "Cache-Control": "no-cache, no-store, must-revalidate"
+      }
+    },
+    {
       "src": "/(.*)",
-      "dest": "build/web/$1"
+      "dest": "/$1"
     }
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
